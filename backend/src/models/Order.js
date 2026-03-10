@@ -2,58 +2,67 @@ import mongoose from 'mongoose';
 
 const orderSchema = mongoose.Schema(
   {
-    // 1. Ai là người đặt hàng? (Liên kết với bảng User)
+    // 1. Người mua
     user: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
-      ref: 'User', 
+      ref: 'User',
     },
-    // 2. Danh sách sản phẩm trong đơn hàng này (Mảng)
+    
+    // 2. Danh sách sản phẩm số khách mua
     orderItems: [
       {
         name: { type: String, required: true },
         qty: { type: Number, required: true },
-        image: { type: String, required: true },
         price: { type: Number, required: true },
         product: {
           type: mongoose.Schema.Types.ObjectId,
           required: true,
-          ref: 'Product', // Liên kết với bảng Product
+          ref: 'Product',
         },
+        // MỚI: Nơi lưu trữ tài sản số trả về cho khách
+        // (Ví dụ: Chứa "XXXX-YYYY-ZZZZ" nếu là Key Win, hoặc "Tài khoản: abc, Pass: 123" nếu là Netflix)
+        deliveredContent: { type: String }, 
       },
     ],
-    // 3. Địa chỉ giao hàng
-    shippingAddress: {
-      address: { type: String, required: true },
-      city: { type: String, required: true },
-      postalCode: { type: String, required: true },
-      country: { type: String, required: true },
+
+    // 3. MỚI: Thông tin nhận hàng (Thay thế cho shippingAddress)
+    digitalDeliveryInfo: {
+      emailReceive: { type: String, required: true }, // Email để hệ thống gửi Key tới
+      accountToUpgrade: { type: String }, // Tài khoản cần nâng cấp (Dành cho Youtube Pre, Spotify...)
+      note: { type: String } // Ghi chú thêm của khách
     },
-    // 4. Phương thức thanh toán (Ví dụ: 'Tiền mặt', 'VNPay')
+
+    // 4. Thanh toán
     paymentMethod: {
       type: String,
       required: true,
     },
-    // 5. Kết quả thanh toán (Sẽ dùng để lưu mã giao dịch từ VNPay trả về sau này)
     paymentResult: {
       id: { type: String },
       status: { type: String },
       update_time: { type: String },
       email_address: { type: String },
     },
-    // 6. Các loại phí (Tiền hàng, Phí ship, Tổng tiền)
-    itemsPrice: { type: Number, required: true, default: 0.0 },
-    shippingPrice: { type: Number, required: true, default: 0.0 },
-    totalPrice: { type: Number, required: true, default: 0.0 },
     
-    // 7. Trạng thái thanh toán và giao hàng
+    // 5. Tổng tiền (Đã bỏ shippingPrice)
+    totalPrice: { type: Number, required: true, default: 0.0 },
+
+    // 6. Trạng thái thanh toán
     isPaid: { type: Boolean, required: true, default: false },
     paidAt: { type: Date },
-    isDelivered: { type: Boolean, required: true, default: false },
-    deliveredAt: { type: Date },
+
+    // 7. MỚI: Trạng thái đơn hàng số (Thay cho isDelivered)
+    status: { 
+      type: String, 
+      required: true, 
+      enum: ['Pending', 'Processing', 'Completed', 'Cancelled'], // Chờ thanh toán -> Đang xử lý -> Hoàn thành -> Hủy
+      default: 'Pending' 
+    },
+    completedAt: { type: Date }, // Thời điểm hoàn tất giao Key/Nâng cấp
   },
   {
-    timestamps: true, // Tự động tạo createdAt và updatedAt
+    timestamps: true,
   }
 );
 
