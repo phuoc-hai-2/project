@@ -1,17 +1,17 @@
 import { useState } from "react";
 import { login } from "../services/authService";
 import { useNavigate } from "react-router-dom";
-
+import Header from "../components/Header";
 function Login() {
   const [form, setForm] = useState({ email: "", password: "" });
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
-    e.prevenDefault();
+    e.preventDefault();
     try {
       const res = await login(form);
       localStorage.setItem("token", res.data.token);
-      navigate("/products");
+      navigate("/home");
     } catch (err) {
       alert("Login failed");
     }
@@ -20,6 +20,7 @@ function Login() {
 
   return (
     <>
+      <Header />
       <div className="container d-flex justify-content-center align-items-center vh-100">
         <div className="card p-4 shadow" style={{ width: "350px" }}>
           <div

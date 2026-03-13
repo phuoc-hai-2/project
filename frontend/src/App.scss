@@ -1,0 +1,35 @@
+body {
+  div {
+    color: red;
+  }
+  .search-box {
+    position: relative;
+    width: 550px;
+  }
+
+  .search-input {
+    width: 100%;
+    height: 45px;
+    border-radius: 25px;
+    border: 2px solid #1862ca;
+    background: white;
+    color: rgb(238, 232, 232);
+    padding-left: 20px;
+    padding-right: 45px;
+  }
+
+  .search-input::placeholder {
+    color: #111111;
+  }
+
+  .search-btn {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    border: none;
+    background: transparent;
+    font-size: 18px;
+    cursor: pointer;
+  }
+}

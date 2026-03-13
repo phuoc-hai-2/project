@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { login } from "../services/authService";
 import { useNavigate } from "react-router-dom";
-
+import { register } from "../services/authService";
+import Header from "../components/Header";
 function Register() {
   const [form, setForm] = useState({
     name: "",
@@ -31,6 +32,7 @@ function Register() {
 
   return (
     <>
+      <Header />
       <div className="container d-flex justify-content-center align-items-center vh-100">
         <div className="card p-4 shadow" style={{ width: "380px" }}>
           <div
