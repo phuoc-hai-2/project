@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import Container from "react-bootstrap/Container";
 
 function Footer() {
@@ -13,3 +14,5 @@ function Footer() {
 }
 
 export default Footer;
+=======
+>>>>>>> parent of d0c9677 (feat: frontend)

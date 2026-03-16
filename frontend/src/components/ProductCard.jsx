@@ -1,59 +1,14 @@
 import { useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
+<<<<<<< HEAD
 import { deleteProduct } from "../services/productService";
+=======
+>>>>>>> parent of d0c9677 (feat: frontend)
 
 const ProductCard = ({ product }) => {
-  const navigate = useNavigate();
-  const userInfo = JSON.parse(localStorage.getItem("userInfo"));
-
-  const handleAddToCart = () => {
-    const cartKey = userInfo ? `cart_${userInfo._id}` : "cart_guest";
-    const cartItems = JSON.parse(localStorage.getItem(cartKey)) || [];
-    const existItem = cartItems.find((x) => x.product === product._id);
-
-    let updatedCart;
-    if (existItem) {
-      updatedCart = cartItems.map((x) =>
-        x.product === existItem.product ? { ...x, qty: x.qty + 1 } : x,
-      );
-    } else {
-      updatedCart = [
-        ...cartItems,
-        {
-          product: product._id,
-          name: product.name,
-          image: product.image,
-          price: product.price,
-          qty: 1,
-        },
-      ];
-    }
-    localStorage.setItem(cartKey, JSON.stringify(updatedCart));
-    navigate("/cart");
-  };
-
-  const goToDetail = () => {
-    navigate(`/product/${product._id}`);
-  };
-
-  const handleDelete = async () => {
-    if (window.confirm("Bạn có chắc chắn muốn xóa sản phẩm này không?")) {
-      try {
-        await deleteProduct(product._id);
-        alert("Đã xóa sản phẩm");
-        window.location.reload();
-      } catch (error) {
-        alert("Lỗi khi xóa sản phẩm");
-      }
-    }
-  };
-
-  const handleEdit = () => {
-    navigate(`/admin/product/edit/${product._id}`);
-  };
-
   return (
+<<<<<<< HEAD
     <Card
       className="shadow-sm border-0 h-100"
       style={{ width: "16rem", transition: "transform 0.2s" }}
@@ -117,6 +72,19 @@ const ProductCard = ({ product }) => {
             </Button>
           </div>
         )}
+=======
+    <Card style={{ width: "18rem" }}>
+      <Card.Img variant="top" src={product.image} />
+
+      <Card.Body>
+        <Card.Title>{product.name}</Card.Title>
+
+        <Card.Text>Giá: {product.price} VND</Card.Text>
+
+        <Card.Text>{product.category}</Card.Text>
+
+        <Button variant="primary">Giỏ Hàng</Button>
+>>>>>>> parent of d0c9677 (feat: frontend)
       </Card.Body>
     </Card>
   );

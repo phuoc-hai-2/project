@@ -11,6 +11,7 @@ const userSchema = mongoose.Schema(
   { timestamps: true },
 );
 
+// Mã hóa mật khẩu trước khi lưu
 userSchema.pre("save", async function (next) {
   if (!this.isModified("password")) return next();
   const salt = await bcrypt.genSalt(10);

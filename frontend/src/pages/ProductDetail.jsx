@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { getProductById } from "../services/productService";
@@ -149,3 +150,5 @@ const ProductDetail = () => {
 };
 
 export default ProductDetail;
+=======
+>>>>>>> parent of d0c9677 (feat: frontend)

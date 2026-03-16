@@ -2,7 +2,10 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { register } from "../services/authService";
 import Header from "../components/Header";
+<<<<<<< HEAD
 
+=======
+>>>>>>> parent of d0c9677 (feat: frontend)
 function Register() {
   const [form, setForm] = useState({
     name: "",
@@ -108,7 +111,6 @@ function Register() {
           </form>
         </div>
       </div>
-      <Footer />
     </>
   );
 }

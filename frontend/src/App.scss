@@ -1,4 +1,10 @@
 body {
+<<<<<<< HEAD
+=======
+  div {
+    color: red;
+  }
+>>>>>>> parent of d0c9677 (feat: frontend)
   .search-box {
     position: relative;
     width: 550px;
@@ -6,11 +12,15 @@ body {
 
   .search-input {
     width: 100%;
-    height: 50px;
+    height: 45px;
     border-radius: 25px;
     border: 2px solid #1862ca;
     background: white;
+<<<<<<< HEAD
     color: #333333;
+=======
+    color: rgb(238, 232, 232);
+>>>>>>> parent of d0c9677 (feat: frontend)
     padding-left: 20px;
     padding-right: 45px;
   }
@@ -21,77 +31,12 @@ body {
 
   .search-btn {
     position: absolute;
-    right: 5px;
+    right: 10px;
     top: 50%;
     transform: translateY(-50%);
     border: none;
     background: transparent;
-  }
-  .menu-wrapper {
-    position: relative;
-  }
-
-  .category-btn {
-    background: #ff6a00;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 6px;
-  }
-
-  .mega-menu {
-    position: absolute;
-    top: 50px;
-    left: 0;
-    width: 100%;
-    background: #121a2f;
-    padding: 40px;
-    color: white;
-    z-index: 1000;
-  }
-
-  .mega-menu ul {
-    list-style: none;
-    padding: 0;
-  }
-
-  .mega-menu li {
-    margin-bottom: 10px;
+    font-size: 18px;
     cursor: pointer;
   }
-
-  .mega-menu li:hover {
-    color: #ff6a00;
-  }
-}
-.promo-banner {
-  height: 160px;
-  margin: 40px 0;
-  background: #55c000;
-  border-radius: 20px;
-  padding: 40px;
-  color: white;
-  font-weight: bold;
-  display: flex;
-  align-items: center;
-  gap: 15px;
-}
-
-.promo-banner h2 {
-  font-size: 36px;
-}
-
-.info-banner {
-  margin-top: 40px;
-  background: #f2f2f2;
-  border-radius: 20px;
-  padding: 30px;
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
-
-.info-banner .icon {
-  font-size: 40px;
-  color: #55c000;
 }

@@ -1,12 +1,5 @@
-import { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import api from "../api/axios";
-import Header from "../components/Header";
-import Container from "react-bootstrap/Container";
-import Button from "react-bootstrap/Button";
-import Table from "react-bootstrap/Table";
-import Card from "react-bootstrap/Card";
 
+<<<<<<< HEAD
 const Cart = () => {
   const navigate = useNavigate();
   const [cartItems, setCartItems] = useState([]);
@@ -214,3 +207,5 @@ const Cart = () => {
 };
 
 export default Cart;
+=======
+>>>>>>> parent of d0c9677 (feat: frontend)

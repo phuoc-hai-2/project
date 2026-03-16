@@ -4,16 +4,25 @@ import {
   getProductByIdService,
 } from "../services/productService.js";
 
+// @desc    Lấy tất cả sản phẩm (có hỗ trợ tìm kiếm theo từ khóa)
+// @route   GET /api/products?keyword=dien-thoai
 export const getProducts = async (req, res) => {
   try {
+    // Lấy từ khóa người dùng gõ trên thanh địa chỉ (nếu có)
     const keyword = req.query.keyword;
+
+    // Gọi Service xử lý phần lấy data
     const products = await getAllProductsService(keyword);
+    console.log(products);
     res.json(products);
   } catch (error) {
-    res.status(500).json({ message: "Lỗi máy chủ khi lấy danh sách sản phẩm" });
+    console.error(error);
+    res.status(500).json({ message: error.message });
   }
 };
 
+// @desc    Lấy chi tiết 1 sản phẩm bằng ID
+// @route   GET /api/products/:id
 export const getProductById = async (req, res) => {
   try {
     const product = await getProductByIdService(req.params.id);
@@ -23,6 +32,9 @@ export const getProductById = async (req, res) => {
   }
 };
 
+// @desc    Tạo một sản phẩm số mới (Kho Key ban đầu sẽ rỗng)
+// @route   POST /api/products
+// @access  Private/Admin
 export const createProduct = async (req, res) => {
   try {
     const { name, price, image, description, category, productType } = req.body;
@@ -33,8 +45,8 @@ export const createProduct = async (req, res) => {
       image,
       category,
       description,
-      productType: productType || "Key",
-      digitalVault: [],
+      productType: productType || "Key", // Mặc định là bán Key tự động
+      digitalVault: [], // Khởi tạo kho rỗng, Admin sẽ nạp Key vào sau
     });
 
     const createdProduct = await product.save();
@@ -46,9 +58,12 @@ export const createProduct = async (req, res) => {
   }
 };
 
+// @desc    Nhập kho (Thêm hàng loạt mã Key vào kho bí mật của 1 sản phẩm)
+// @route   POST /api/products/:id/keys
+// @access  Private/Admin
 export const addKeysToVault = async (req, res) => {
   try {
-    const { keys } = req.body;
+    const { keys } = req.body; // Frontend sẽ gửi lên 1 mảng: ["ABCD-1234", "WXYZ-5678"]
     const product = await Product.findById(req.params.id);
 
     if (!product) {
@@ -61,11 +76,13 @@ export const addKeysToVault = async (req, res) => {
         .json({ message: "Sản phẩm này là Dịch vụ, không cần nhập Key" });
     }
 
+    // Biến mảng chuỗi thành mảng Object đúng chuẩn của schema
     const newKeys = keys.map((k) => ({
       content: k,
       isSold: false,
     }));
 
+    // Bơm Key mới vào kho
     product.digitalVault.push(...newKeys);
 
     await product.save();
@@ -77,46 +94,5 @@ export const addKeysToVault = async (req, res) => {
     res
       .status(500)
       .json({ message: "Lỗi khi nhập kho Key", error: error.message });
-  }
-};
-
-export const updateProduct = async (req, res) => {
-  try {
-    const { name, price, image, description, category, productType } = req.body;
-    const product = await Product.findById(req.params.id);
-
-    if (product) {
-      product.name = name || product.name;
-      product.price = price || product.price;
-      product.image = image || product.image;
-      product.description = description || product.description;
-      product.category = category || product.category;
-      product.productType = productType || product.productType;
-
-      const updatedProduct = await product.save();
-      res.json(updatedProduct);
-    } else {
-      res.status(404).json({ message: "Không tìm thấy sản phẩm" });
-    }
-  } catch (error) {
-    res
-      .status(500)
-      .json({ message: "Lỗi khi cập nhật sản phẩm", error: error.message });
-  }
-};
-
-export const deleteProduct = async (req, res) => {
-  try {
-    const product = await Product.findById(req.params.id);
-    if (product) {
-      await Product.deleteOne({ _id: product._id });
-      res.json({ message: "Đã xóa sản phẩm thành công" });
-    } else {
-      res.status(404).json({ message: "Không tìm thấy sản phẩm" });
-    }
-  } catch (error) {
-    res
-      .status(500)
-      .json({ message: "Lỗi khi xóa sản phẩm", error: error.message });
   }
 };
