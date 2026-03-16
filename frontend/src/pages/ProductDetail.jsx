@@ -10,6 +10,7 @@ import ListGroup from "react-bootstrap/ListGroup";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Card from "react-bootstrap/Card";
+import Footer from "../components/Footer";
 
 const ProductDetail = () => {
   const { id } = useParams();

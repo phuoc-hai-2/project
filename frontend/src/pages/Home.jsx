@@ -69,6 +69,8 @@ const Home = () => {
           </div>
         )}
       </Container>
+
+      <Footer />
     </>
   );
 };
