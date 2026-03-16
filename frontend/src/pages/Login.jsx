@@ -2,6 +2,7 @@ import { useState } from "react";
 import { login } from "../services/authService";
 import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
+import Footer from "../components/Footer";
 function Login() {
   const [form, setForm] = useState({ email: "", password: "" });
   const navigate = useNavigate();
@@ -10,12 +11,20 @@ function Login() {
     e.preventDefault();
     try {
       const res = await login(form);
-      localStorage.setItem("token", res.data.token);
-      navigate("/home");
+      const data = res.data;
+      localStorage.setItem("userInfo", JSON.stringify(data));
+      if (data.role === "admin") {
+        navigate("/admin/product/add");
+      } else {
+        navigate("/home");
+      }
     } catch (err) {
-      alert("Login failed");
+      const errorMessage =
+        err.response?.data?.message || err.message || "Lỗi không xác định";
+      alert("Lỗi đăng nhập: " + errorMessage);
     }
   };
+
   const [mode, setMode] = useState("login");
 
   return (
@@ -85,6 +94,7 @@ function Login() {
           </form>
         </div>
       </div>
+      <Footer />
     </>
   );
 }

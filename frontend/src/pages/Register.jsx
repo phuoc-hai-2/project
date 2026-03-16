@@ -3,6 +3,7 @@ import { login } from "../services/authService";
 import { useNavigate } from "react-router-dom";
 import { register } from "../services/authService";
 import Header from "../components/Header";
+import Footer from "../components/Footer";
 function Register() {
   const [form, setForm] = useState({
     name: "",
@@ -110,6 +111,7 @@ function Register() {
           </form>
         </div>
       </div>
+      <Footer />
     </>
   );
 }
