@@ -3,7 +3,10 @@ import { useNavigate } from "react-router-dom";
 import { register } from "../services/authService";
 import Header from "../components/Header";
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> parent of d0c9677 (feat: frontend)
 =======
 >>>>>>> parent of d0c9677 (feat: frontend)
 function Register() {

@@ -13,7 +13,10 @@ function Header() {
     localStorage.removeItem("token");
     navigate("/");
   };
+<<<<<<< HEAD
 
+=======
+>>>>>>> parent of d0c9677 (feat: frontend)
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
       <Container style={{ paddingLeft: "100px", paddingRight: "100px" }}>
