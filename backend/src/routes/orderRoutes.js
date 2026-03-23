@@ -1,16 +1,10 @@
-import express from "express";
-import {
-  addOrderItems,
-  getMyOrders,
-  updateOrderToDelivered,
-} from "../controllers/orderController.js";
-import { protect } from "../middlewares/authMiddleware.js";
-import { admin } from "../middlewares/roleMiddleware.js";
+import express from 'express';
+import { addOrderItems } from '../controllers/orderController.js';
+import { protect } from '../middlewares/authMiddleware.js';
 
 const router = express.Router();
 
-router.post("/", protect, addOrderItems);
-router.get("/myorders", protect, getMyOrders);
-router.put("/:id/deliver", protect, admin, updateOrderToDelivered);
+// Route này yêu cầu phải đi qua trạm kiểm duyệt 'protect' (phải đăng nhập)
+router.post('/', protect, addOrderItems);
 
 export default router;

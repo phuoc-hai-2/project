@@ -6,7 +6,6 @@ import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
-import Footer from "../components/Footer";
 
 const AdminProductAdd = () => {
   const navigate = useNavigate();
@@ -58,12 +57,12 @@ const AdminProductAdd = () => {
   return (
     <>
       <Header />
-      <Container className="d-flex justify-content-center">
+      <Container className="my-5 d-flex justify-content-center">
         <Card className="shadow-sm w-100" style={{ maxWidth: "800px" }}>
           <Card.Header className="bg-primary text-white text-center py-3">
             <h3 className="mb-0">Thêm Sản Phẩm Mới</h3>
           </Card.Header>
-          <Card.Body className="p-4 ">
+          <Card.Body className="p-4">
             <Form onSubmit={submitHandler}>
               <Form.Group className="mb-4">
                 <Form.Label className="fw-bold">Tên sản phẩm</Form.Label>
@@ -147,7 +146,6 @@ const AdminProductAdd = () => {
           </Card.Body>
         </Card>
       </Container>
-      <Footer />
     </>
   );
 };

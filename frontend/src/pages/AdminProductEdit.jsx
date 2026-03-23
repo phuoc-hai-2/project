@@ -6,7 +6,7 @@ import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
-import Footer from "../components/Footer";
+
 const AdminProductEdit = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -66,14 +66,14 @@ const AdminProductEdit = () => {
   return (
     <>
       <Header />
-      <Container className="d-flex justify-content-center">
+      <Container className="my-5 d-flex justify-content-center">
         <Card className="shadow-sm w-100" style={{ maxWidth: "800px" }}>
-          <Card.Header className="bg-warning text-dark text-center py-2">
+          <Card.Header className="bg-warning text-dark text-center py-3">
             <h3 className="mb-0 fw-bold">Chỉnh Sửa Sản Phẩm</h3>
           </Card.Header>
-          <Card.Body className="p-3">
+          <Card.Body className="p-4">
             <Form onSubmit={submitHandler}>
-              <Form.Group className="mb-3">
+              <Form.Group className="mb-4">
                 <Form.Label className="fw-bold">Tên sản phẩm</Form.Label>
                 <Form.Control
                   type="text"
@@ -83,7 +83,7 @@ const AdminProductEdit = () => {
                 />
               </Form.Group>
 
-              <Form.Group className="mb-3">
+              <Form.Group className="mb-4">
                 <Form.Label className="fw-bold">Giá (VND)</Form.Label>
                 <Form.Control
                   type="number"
@@ -93,13 +93,13 @@ const AdminProductEdit = () => {
                 />
               </Form.Group>
 
-              <Form.Group className="mb-3">
+              <Form.Group className="mb-4">
                 <Form.Label className="fw-bold">Hình ảnh</Form.Label>
                 <Form.Control type="file" onChange={uploadFileHandler} />
                 {image && (
                   <div className="mt-3">
                     <img
-                      src={image}
+                      src={`http://localhost:5000${image}`}
                       alt="Preview"
                       style={{ width: "120px", borderRadius: "8px" }}
                     />
@@ -107,7 +107,7 @@ const AdminProductEdit = () => {
                 )}
               </Form.Group>
 
-              <Form.Group className="mb-3">
+              <Form.Group className="mb-4">
                 <Form.Label className="fw-bold">
                   Danh mục (Có thể tự gõ mới)
                 </Form.Label>
@@ -119,7 +119,7 @@ const AdminProductEdit = () => {
                 />
               </Form.Group>
 
-              <Form.Group className="mb-3">
+              <Form.Group className="mb-4">
                 <Form.Label className="fw-bold">Mô tả</Form.Label>
                 <Form.Control
                   as="textarea"
@@ -142,7 +142,6 @@ const AdminProductEdit = () => {
           </Card.Body>
         </Card>
       </Container>
-      <Footer />
     </>
   );
 };
